@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .header {
+            padding: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .subject-selector {
+            padding: 30px;
+            text-align: center;
+            background: #f8f9fa;
+        }
+
+        .subject-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .subject-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subject-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .subject-btn:focus {
+            outline: 3px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+
+        .science-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .maths-btn {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .cs-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .quiz-container {
+            padding: 40px;
+            display: none;
+        }
+
+        .quiz-container.active {
+            display: block;
+        }
+
+        .question-header {
+            margin-bottom: 30px;
+        }
+
+        .subject-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .science-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .maths-badge {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .cs-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option-btn {
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            background: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .option-btn:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        .option-btn.correct {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            border-color: #44a08d;
+        }
+
+        .option-btn.incorrect {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border-color: #ee5a52;
+        }
+
+        .option-btn.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .explanation {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .explanation h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .explanation p {
+            color: #5a6c7d;
+            line-height: 1.6;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .next-btn:focus {
+            outline: 3px solid rgba(102, 126, 234, 0.5);
+            outline-offset: 2px;
+        }
+
+        .next-btn.show {
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .subject-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .subject-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .quiz-container {
+                padding: 20px;
+            }
+
+            .question-text {
+                font-size: 1.3rem;
+            }
+
+            .option-btn {
+                padding: 15px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .subject-selector {
+                padding: 20px;
+            }
+
+            .quiz-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Interactive Quiz Game</h1>
+            <p>Test your knowledge across multiple subjects</p>
+        </div>
+
+        <div class="subject-selector" id="subjectSelector">
+            <h2>Choose a Subject</h2>
+            <div class="subject-buttons">
+                <button class="subject-btn science-btn" onclick="startQuiz('science')" tabindex="1">
+                    🔬 Science
+                </button>
+                <button class="subject-btn maths-btn" onclick="startQuiz('maths')" tabindex="2">
+                    📐 Mathematics
+                </button>
+                <button class="subject-btn cs-btn" onclick="startQuiz('cs')" tabindex="3">
+                    💻 Computer Science
+                </button>
+            </div>
+        </div>
+
+        <div class="quiz-container" id="quizContainer">
+            <div class="question-header">
+                <div class="subject-badge" id="subjectBadge"></div>
+                <div class="question-text" id="questionText"></div>
+            </div>
+
+            <div class="options-container" id="optionsContainer"></div>
+
+            <div class="explanation" id="explanation">
+                <h4>Explanation:</h4>
+                <p id="explanationText"></p>
+            </div>
+
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()" tabindex="5">
+                Next Question
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Question bank with ≥6 questions per subject
+        const questionBank = {
+            science: [
+                {
+                    question: "What is the chemical symbol for gold?",
+                    options: ["Go", "Gd", "Au", "Ag"],
+                    correct: 2,
+                    explanation: "Au is the chemical symbol for gold, derived from the Latin word 'aurum' meaning gold."
+                },
+                {
+                    question: "Which planet is known as the Red Planet?",
+                    options: ["Venus", "Mars", "Jupiter", "Saturn"],
+                    correct: 1,
+                    explanation: "Mars is called the Red Planet due to iron oxide (rust) on its surface giving it a reddish appearance."
+                },
+                {
+                    question: "What is the speed of light in vacuum?",
+                    options: ["299,792,458 m/s", "300,000,000 m/s", "299,792,458 km/s", "3 × 10⁸ m/s"],
+                    correct: 0,
+                    explanation: "The exact speed of light in vacuum is 299,792,458 meters per second, which is approximately 3 × 10⁸ m/s."
+                },
+                {
+                    question: "Which gas makes up about 78% of Earth's atmosphere?",
+                    options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Argon"],
+                    correct: 2,
+                    explanation: "Nitrogen makes up approximately 78% of Earth's atmosphere, while oxygen makes up about 21%."
+                },
+                {
+                    question: "What is the smallest unit of matter?",
+                    options: ["Molecule", "Atom", "Proton", "Quark"],
+                    correct: 1,
+                    explanation: "An atom is the smallest unit of matter that retains the properties of an element. Quarks are smaller but don't exist independently."
+                },
+                {
+                    question: "Which scientist developed the theory of relativity?",
+                    options: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Stephen Hawking"],
+                    correct: 1,
+                    explanation: "Albert Einstein developed both the special theory of relativity (1905) and general theory of relativity (1915)."
+                },
+                {
+                    question: "What is the pH of pure water?",
+                    options: ["5", "6", "7", "8"],
+                    correct: 2,
+                    explanation: "Pure water has a pH of 7, which is considered neutral on the pH scale."
+                },
+                {
+                    question: "Which organelle is known as the powerhouse of the cell?",
+                    options: ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic reticulum"],
+                    correct: 1,
+                    explanation: "Mitochondria are called the powerhouse of the cell because they produce ATP, the cell's energy currency."
+                }
+            ],
+            maths: [
+                {
+                    question: "What is the value of π (pi) to two decimal places?",
+                    options: ["3.14", "3.16", "3.18", "3.20"],
+                    correct: 0,
+                    explanation: "Pi (π) is approximately 3.14159, which rounds to 3.14 when expressed to two decimal places."
+                },
+                {
+                    question: "What is the derivative of x²?",
+                    options: ["x", "2x", "2x²", "x²/2"],
+                    correct: 1,
+                    explanation: "Using the power rule, the derivative of x² is 2x¹ = 2x."
+                },
+                {
+                    question: "What is the area of a circle with radius 7?",
+                    options: ["49π", "14π", "44π", "154π"],
+                    correct: 0,
+                    explanation: "The area of a circle is πr². With radius 7, the area is π × 7² = 49π."
+                },
+                {
+                    question: "What is the sum of angles in a triangle?",
+                    options: ["90°", "180°", "270°", "360°"],
+                    correct: 1,
+                    explanation: "The sum of interior angles in any triangle is always 180°."
+                },
+                {
+                    question: "What is the square root of 144?",
+                    options: ["11", "12", "13", "14"],
+                    correct: 1,
+                    explanation: "12 × 12 = 144, so the square root of 144 is 12."
+                },
+                {
+                    question: "What is the value of 2⁵?",
+                    options: ["16", "32", "64", "128"],
+                    correct: 1,
+                    explanation: "2⁵ = 2 × 2 × 2 × 2 × 2 = 32."
+                },
+                {
+                    question: "What is the slope of the line y = 3x + 5?",
+                    options: ["3", "5", "3/5", "5/3"],
+                    correct: 0,
+                    explanation: "In the equation y = mx + b, m is the slope. For y = 3x + 5, the slope is 3."
+                },
+                {
+                    question: "What is the factorial of 5 (5!)?",
+                    options: ["60", "120", "240", "720"],
+                    correct: 1,
+                    explanation: "5! = 5 × 4 × 3 × 2 × 1 = 120."
+                }
+            ],
+            cs: [
+                {
+                    question: "What does HTML stand for?",
+                    options: ["HyperText Markup Language", "High Tech Modern Language", "Home Tool Markup Language", "Hyperlink and Text Markup Language"],
+                    correct: 0,
+                    explanation: "HTML stands for HyperText Markup Language, the standard markup language for creating web pages."
+                },
+                {
+                    question: "Which programming language was created by Guido van Rossum?",
+                    options: ["Java", "Python", "C++", "JavaScript"],
+                    correct: 1,
+                    explanation: "Python was created by Guido van Rossum and first released in 1991."
+                },
+                {
+                    question: "What is the time complexity of binary search?",
+                    options: ["O(n)", "O(log n)", "O(n²)", "O(1)"],
+                    correct: 1,
+                    explanation: "Binary search has O(log n) time complexity because it eliminates half of the search space in each iteration."
+                },
+                {
+                    question: "Which data structure follows LIFO (Last In, First Out) principle?",
+                    options: ["Queue", "Stack", "Array", "Linked List"],
+                    correct: 1,
+                    explanation: "A stack follows the LIFO principle where the last element added is the first one to be removed."
+                },
+                {
+                    question: "What does API stand for?",
+                    options: ["Application Programming Interface", "Advanced Programming Interface", "Automated Program Integration", "Application Process Integration"],
+                    correct: 0,
+                    explanation: "API stands for Application Programming Interface, which allows different software applications to communicate."
+                },
+                {
+                    question: "Which protocol is used for secure web communication?",
+                    options: ["HTTP", "FTP", "HTTPS", "SMTP"],
+                    correct: 2,
+                    explanation: "HTTPS (HTTP Secure) uses SSL/TLS encryption to provide secure communication over the internet."
+                },
+                {
+                    question: "What is the purpose of a database index?",
+                    options: ["To store data", "To improve query performance", "To backup data", "To validate data"],
+                    correct: 1,
+                    explanation: "Database indexes are used to improve query performance by providing faster access to data."
+                },
+                {
+                    question: "Which sorting algorithm has the best average-case time complexity?",
+                    options: ["Bubble Sort", "Quick Sort", "Selection Sort", "Insertion Sort"],
+                    correct: 1,
+                    explanation: "Quick Sort has an average-case time complexity of O(n log n), making it one of the most efficient sorting algorithms."
+                }
+            ]
+        };
+
+        let currentSubject = '';
+        let currentQuestion = null;
+        let correctAnswerIndex = -1;
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Pick and render a random question
+        function pickAndRenderQuestion() {
+            const questions = questionBank[currentSubject];
+            const randomIndex = Math.floor(Math.random() * questions.length);
+            currentQuestion = questions[randomIndex];
+            
+            // Shuffle options while preserving correct answer mapping
+            const shuffledOptions = shuffleArray(currentQuestion.options);
+            correctAnswerIndex = shuffledOptions.indexOf(currentQuestion.options[currentQuestion.correct]);
+            
+            // Update UI
+            document.getElementById('subjectBadge').textContent = currentSubject.toUpperCase();
+            document.getElementById('subjectBadge').className = `subject-badge ${currentSubject}-badge`;
+            document.getElementById('questionText').textContent = currentQuestion.question;
+            
+            // Clear and populate options
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            shuffledOptions.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.textContent = option;
+                button.onclick = () => selectOption(index);
+                button.setAttribute('tabindex', index + 1);
+                optionsContainer.appendChild(button);
+            });
+            
+            // Reset UI state
+            document.getElementById('explanation').classList.remove('show');
+            document.getElementById('nextBtn').classList.remove('show');
+        }
+
+        // Handle option selection
+        function selectOption(selectedIndex) {
+            const options = document.querySelectorAll('.option-btn');
+            
+            // Disable all options
+            options.forEach(btn => {
+                btn.classList.add('disabled');
+                btn.onclick = null;
+            });
+            
+            // Mark correct and incorrect answers
+            if (selectedIndex === correctAnswerIndex) {
+                options[selectedIndex].classList.add('correct');
+            } else {
+                options[selectedIndex].classList.add('incorrect');
+                options[correctAnswerIndex].classList.add('correct');
+            }
+            
+            // Show explanation and next button
+            document.getElementById('explanationText').textContent = currentQuestion.explanation;
+            document.getElementById('explanation').classList.add('show');
+            document.getElementById('nextBtn').classList.add('show');
+            document.getElementById('nextBtn').focus();
+        }
+
+        // Start quiz for selected subject
+        function startQuiz(subject) {
+            currentSubject = subject;
+            document.getElementById('subjectSelector').style.display = 'none';
+            document.getElementById('quizContainer').classList.add('active');
+            pickAndRenderQuestion();
+        }
+
+        // Load next question
+        function nextQuestion() {
+            pickAndRenderQuestion();
+        }
+
+        // Keyboard accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const focusedElement = document.activeElement;
+                if (focusedElement.classList.contains('subject-btn')) {
+                    focusedElement.click();
+                } else if (focusedElement.classList.contains('option-btn') && !focusedElement.classList.contains('disabled')) {
+                    focusedElement.click();
+                } else if (focusedElement.classList.contains('next-btn')) {
+                    focusedElement.click();
+                }
+            }
+        });
+
+        // Focus management
+        document.getElementById('quizContainer').addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                const options = document.querySelectorAll('.option-btn:not(.disabled)');
+                if (options.length > 0 && document.activeElement.classList.contains('option-btn')) {
+                    e.preventDefault();
+                    const currentIndex = Array.from(options).indexOf(document.activeElement);
+                    const nextIndex = (currentIndex + 1) % options.length;
+                    options[nextIndex].focus();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
