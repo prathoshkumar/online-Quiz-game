@@ -315,6 +315,117 @@
             font-size: 1.2rem;
         }
 
+        .quiz-results {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .quiz-results h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .final-score {
+            margin-bottom: 30px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .percentage {
+            font-size: 2.5rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .score-text {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .score-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .score-item-large {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 120px;
+        }
+
+        .score-item-large.correct {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .score-item-large.incorrect {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .score-item-large .score-icon {
+            font-size: 2rem;
+        }
+
+        .score-label {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .restart-btn:focus {
+            outline: 3px solid rgba(40, 167, 69, 0.5);
+            outline-offset: 2px;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -479,6 +590,72 @@
                     options: ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic reticulum"],
                     correct: 1,
                     explanation: "Mitochondria are called the powerhouse of the cell because they produce ATP, the cell's energy currency."
+                },
+                {
+                    question: "What is the chemical formula for water?",
+                    options: ["H2O", "CO2", "NaCl", "O2"],
+                    correct: 0,
+                    explanation: "Water is composed of two hydrogen atoms and one oxygen atom, giving it the chemical formula H2O."
+                },
+                {
+                    question: "Which force keeps planets in orbit around the sun?",
+                    options: ["Magnetic force", "Gravitational force", "Electric force", "Nuclear force"],
+                    correct: 1,
+                    explanation: "Gravitational force is what keeps planets in orbit around the sun, as described by Newton's law of universal gravitation."
+                },
+                {
+                    question: "What is the hardest natural substance on Earth?",
+                    options: ["Gold", "Iron", "Diamond", "Quartz"],
+                    correct: 2,
+                    explanation: "Diamond is the hardest known natural substance on Earth, with a Mohs hardness of 10."
+                },
+                {
+                    question: "Which blood type is known as the universal donor?",
+                    options: ["A+", "B+", "AB+", "O-"],
+                    correct: 3,
+                    explanation: "O- blood type is considered the universal donor because it can be given to people with any blood type."
+                },
+                {
+                    question: "What is the largest planet in our solar system?",
+                    options: ["Earth", "Saturn", "Jupiter", "Neptune"],
+                    correct: 2,
+                    explanation: "Jupiter is the largest planet in our solar system, with a mass greater than all other planets combined."
+                },
+                {
+                    question: "Which gas do plants absorb from the atmosphere?",
+                    options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Helium"],
+                    correct: 2,
+                    explanation: "Plants absorb carbon dioxide from the atmosphere during photosynthesis to produce glucose and release oxygen."
+                },
+                {
+                    question: "What is the freezing point of water in Celsius?",
+                    options: ["-10°C", "0°C", "10°C", "32°C"],
+                    correct: 1,
+                    explanation: "Water freezes at 0°C (32°F) under standard atmospheric pressure."
+                },
+                {
+                    question: "Which scientist discovered the laws of motion?",
+                    options: ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Charles Darwin"],
+                    correct: 1,
+                    explanation: "Isaac Newton discovered the three laws of motion, which form the foundation of classical mechanics."
+                },
+                {
+                    question: "What is the chemical symbol for sodium?",
+                    options: ["So", "Na", "Sa", "No"],
+                    correct: 1,
+                    explanation: "Na is the chemical symbol for sodium, derived from the Latin word 'natrium'."
+                },
+                {
+                    question: "Which process converts light energy into chemical energy?",
+                    options: ["Respiration", "Photosynthesis", "Digestion", "Fermentation"],
+                    correct: 1,
+                    explanation: "Photosynthesis converts light energy from the sun into chemical energy stored in glucose molecules."
+                },
+                {
+                    question: "What is the speed of sound in air at room temperature?",
+                    options: ["300 m/s", "343 m/s", "400 m/s", "500 m/s"],
+                    correct: 1,
+                    explanation: "The speed of sound in air at room temperature (20°C) is approximately 343 meters per second."
                 }
             ],
             maths: [
@@ -529,6 +706,72 @@
                     options: ["60", "120", "240", "720"],
                     correct: 1,
                     explanation: "5! = 5 × 4 × 3 × 2 × 1 = 120."
+                },
+                {
+                    question: "What is the integral of 2x with respect to x?",
+                    options: ["x²", "x² + C", "2x²", "2x² + C"],
+                    correct: 1,
+                    explanation: "The integral of 2x is x² + C, where C is the constant of integration."
+                },
+                {
+                    question: "What is the value of log₁₀(100)?",
+                    options: ["1", "2", "10", "100"],
+                    correct: 1,
+                    explanation: "log₁₀(100) = 2 because 10² = 100."
+                },
+                {
+                    question: "What is the circumference of a circle with diameter 14?",
+                    options: ["7π", "14π", "21π", "28π"],
+                    correct: 1,
+                    explanation: "Circumference = π × diameter = π × 14 = 14π."
+                },
+                {
+                    question: "What is the value of sin(90°)?",
+                    options: ["0", "0.5", "1", "√2/2"],
+                    correct: 2,
+                    explanation: "sin(90°) = 1, as the sine of a right angle is 1."
+                },
+                {
+                    question: "What is the quadratic formula?",
+                    options: ["x = (-b ± √(b²-4ac))/2a", "x = (b ± √(b²-4ac))/2a", "x = (-b ± √(b²+4ac))/2a", "x = (b ± √(b²+4ac))/2a"],
+                    correct: 0,
+                    explanation: "The quadratic formula is x = (-b ± √(b²-4ac))/2a for equations of the form ax² + bx + c = 0."
+                },
+                {
+                    question: "What is the probability of rolling a 6 on a fair die?",
+                    options: ["1/3", "1/4", "1/5", "1/6"],
+                    correct: 3,
+                    explanation: "A fair die has 6 faces, so the probability of rolling a 6 is 1/6."
+                },
+                {
+                    question: "What is the median of the numbers 1, 3, 5, 7, 9?",
+                    options: ["3", "4", "5", "6"],
+                    correct: 2,
+                    explanation: "The median is the middle value when numbers are arranged in order. Here it's 5."
+                },
+                {
+                    question: "What is the derivative of sin(x)?",
+                    options: ["cos(x)", "-cos(x)", "sin(x)", "-sin(x)"],
+                    correct: 0,
+                    explanation: "The derivative of sin(x) is cos(x)."
+                },
+                {
+                    question: "What is the volume of a cube with side length 3?",
+                    options: ["9", "18", "27", "36"],
+                    correct: 2,
+                    explanation: "Volume of a cube = side³ = 3³ = 27."
+                },
+                {
+                    question: "What is the value of tan(45°)?",
+                    options: ["0", "1", "√2", "√3"],
+                    correct: 1,
+                    explanation: "tan(45°) = 1, as tan(45°) = sin(45°)/cos(45°) = (√2/2)/(√2/2) = 1."
+                },
+                {
+                    question: "What is the next number in the sequence: 2, 4, 8, 16, ?",
+                    options: ["20", "24", "32", "64"],
+                    correct: 2,
+                    explanation: "This is a geometric sequence where each term is multiplied by 2. 16 × 2 = 32."
                 }
             ],
             cs: [
@@ -579,6 +822,72 @@
                     options: ["Bubble Sort", "Quick Sort", "Selection Sort", "Insertion Sort"],
                     correct: 1,
                     explanation: "Quick Sort has an average-case time complexity of O(n log n), making it one of the most efficient sorting algorithms."
+                },
+                {
+                    question: "What does CSS stand for?",
+                    options: ["Computer Style Sheets", "Creative Style Sheets", "Cascading Style Sheets", "Colorful Style Sheets"],
+                    correct: 2,
+                    explanation: "CSS stands for Cascading Style Sheets, used to style and layout web pages."
+                },
+                {
+                    question: "Which programming paradigm does Java primarily follow?",
+                    options: ["Functional", "Procedural", "Object-Oriented", "Logic"],
+                    correct: 2,
+                    explanation: "Java is primarily an object-oriented programming language, focusing on objects and classes."
+                },
+                {
+                    question: "What is the time complexity of linear search?",
+                    options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+                    correct: 2,
+                    explanation: "Linear search has O(n) time complexity as it may need to check every element in the worst case."
+                },
+                {
+                    question: "Which protocol is used for sending emails?",
+                    options: ["HTTP", "FTP", "SMTP", "TCP"],
+                    correct: 2,
+                    explanation: "SMTP (Simple Mail Transfer Protocol) is used for sending emails."
+                },
+                {
+                    question: "What is a variable in programming?",
+                    options: ["A fixed value", "A storage location with a name", "A function", "A loop"],
+                    correct: 1,
+                    explanation: "A variable is a storage location identified by a memory address and an associated symbolic name."
+                },
+                {
+                    question: "Which data structure uses FIFO (First In, First Out)?",
+                    options: ["Stack", "Queue", "Array", "Tree"],
+                    correct: 1,
+                    explanation: "A queue follows the FIFO principle where the first element added is the first one to be removed."
+                },
+                {
+                    question: "What does SQL stand for?",
+                    options: ["Structured Query Language", "Simple Query Language", "Standard Query Language", "System Query Language"],
+                    correct: 0,
+                    explanation: "SQL stands for Structured Query Language, used for managing and manipulating databases."
+                },
+                {
+                    question: "Which is NOT a valid data type in most programming languages?",
+                    options: ["Integer", "String", "Boolean", "Loop"],
+                    correct: 3,
+                    explanation: "Loop is a control structure, not a data type. Common data types include integer, string, and boolean."
+                },
+                {
+                    question: "What is the purpose of version control systems like Git?",
+                    options: ["Compile code", "Track changes in code", "Execute programs", "Debug code"],
+                    correct: 1,
+                    explanation: "Version control systems like Git are used to track and manage changes in code over time."
+                },
+                {
+                    question: "Which is a compiled language?",
+                    options: ["JavaScript", "Python", "C++", "HTML"],
+                    correct: 2,
+                    explanation: "C++ is a compiled language that needs to be compiled before execution, unlike interpreted languages."
+                },
+                {
+                    question: "What does RAM stand for?",
+                    options: ["Random Access Memory", "Read Access Memory", "Rapid Access Memory", "Real-time Access Memory"],
+                    correct: 0,
+                    explanation: "RAM stands for Random Access Memory, a type of computer memory that can be accessed randomly."
                 }
             ]
         };
@@ -590,6 +899,9 @@
             correct: 0,
             incorrect: 0
         };
+        let usedQuestions = [];
+        let currentQuestionNumber = 0;
+        let totalQuestions = 0;
 
         // Fisher-Yates shuffle algorithm
         function shuffleArray(array) {
@@ -604,7 +916,21 @@
         // Pick and render a random question
         function pickAndRenderQuestion() {
             const questions = questionBank[currentSubject];
-            const randomIndex = Math.floor(Math.random() * questions.length);
+            
+            // Check if all questions have been used
+            if (usedQuestions.length >= totalQuestions) {
+                endQuiz();
+                return;
+            }
+            
+            // Find an unused question
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * questions.length);
+            } while (usedQuestions.includes(randomIndex));
+            
+            usedQuestions.push(randomIndex);
+            currentQuestionNumber++;
             currentQuestion = questions[randomIndex];
             
             // Shuffle options while preserving correct answer mapping
@@ -612,7 +938,7 @@
             correctAnswerIndex = shuffledOptions.indexOf(currentQuestion.options[currentQuestion.correct]);
             
             // Update UI
-            document.getElementById('subjectBadge').textContent = currentSubject.toUpperCase();
+            document.getElementById('subjectBadge').textContent = `${currentSubject.toUpperCase()} - Question ${currentQuestionNumber}/${totalQuestions}`;
             document.getElementById('subjectBadge').className = `subject-badge ${currentSubject}-badge`;
             document.getElementById('questionText').textContent = currentQuestion.question;
             
@@ -660,6 +986,16 @@
             // Show explanation and next button
             document.getElementById('explanationText').textContent = currentQuestion.explanation;
             document.getElementById('explanation').classList.add('show');
+            
+            // Check if this was the last question
+            if (currentQuestionNumber >= totalQuestions) {
+                document.getElementById('nextBtn').textContent = 'Finish Quiz';
+                document.getElementById('nextBtn').onclick = endQuiz;
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next Question';
+                document.getElementById('nextBtn').onclick = nextQuestion;
+            }
+            
             document.getElementById('nextBtn').classList.add('show');
             document.getElementById('nextBtn').focus();
         }
@@ -670,11 +1006,73 @@
             document.getElementById('incorrectCount').textContent = score.incorrect;
         }
 
-        // Reset score
+        // Reset score and quiz state
         function resetScore() {
             score.correct = 0;
             score.incorrect = 0;
+            usedQuestions = [];
+            currentQuestionNumber = 0;
+            totalQuestions = 0;
             updateScoreDisplay();
+        }
+
+        // End quiz and show final results
+        function endQuiz() {
+            const totalAnswered = score.correct + score.incorrect;
+            const percentage = totalAnswered > 0 ? Math.round((score.correct / totalAnswered) * 100) : 0;
+            
+            // Hide quiz content
+            document.getElementById('questionText').style.display = 'none';
+            document.getElementById('optionsContainer').style.display = 'none';
+            document.getElementById('explanation').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+            
+            // Show final results
+            const resultsHTML = `
+                <div class="quiz-results">
+                    <h2>🎉 Quiz Complete!</h2>
+                    <div class="final-score">
+                        <div class="score-circle">
+                            <span class="percentage">${percentage}%</span>
+                            <span class="score-text">Final Score</span>
+                        </div>
+                    </div>
+                    <div class="score-breakdown">
+                        <div class="score-item-large correct">
+                            <span class="score-icon">✅</span>
+                            <span class="score-label">Correct</span>
+                            <span class="score-value">${score.correct}</span>
+                        </div>
+                        <div class="score-item-large incorrect">
+                            <span class="score-icon">❌</span>
+                            <span class="score-label">Incorrect</span>
+                            <span class="score-value">${score.incorrect}</span>
+                        </div>
+                    </div>
+                    <div class="quiz-actions">
+                        <button class="restart-btn" onclick="restartQuiz()">Try Again</button>
+                        <button class="back-btn" onclick="goBack()">Choose Different Subject</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('subjectBadge').innerHTML = resultsHTML;
+        }
+
+        // Restart the current quiz
+        function restartQuiz() {
+            resetScore();
+            totalQuestions = Math.min(questionBank[currentSubject].length, 15); // Limit to 15 questions
+            usedQuestions = [];
+            currentQuestionNumber = 0;
+            
+            // Reset UI
+            document.getElementById('questionText').style.display = 'block';
+            document.getElementById('optionsContainer').style.display = 'block';
+            document.getElementById('explanation').style.display = 'block';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            
+            pickAndRenderQuestion();
         }
 
         // Go back to subject selection
@@ -688,6 +1086,7 @@
         function startQuiz(subject) {
             currentSubject = subject;
             resetScore(); // Reset score when starting new subject
+            totalQuestions = Math.min(questionBank[currentSubject].length, 15); // Limit to 15 questions per quiz
             document.getElementById('subjectSelector').style.display = 'none';
             document.getElementById('quizContainer').classList.add('active');
             pickAndRenderQuestion();
